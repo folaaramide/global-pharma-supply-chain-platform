@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Report Incident</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="shipments.html">Shipments</a>
+
+<a href="warehouses.html">Warehouses</a>
+
+<a href="incidents.html">Incidents</a>
+
+<a href="report_incident.html">Report Incident</a>
+
+</nav>
+
+<div class="container">
+
+<h1>Report Incident</h1>
+
+<form id="incidentForm">
+
+<label>Incident Type</label>
+
+<select id="incident_type">
+
+<option>Temperature Excursion</option>
+
+<option>Shipment Delay</option>
+
+<option>Inventory Shortage</option>
+
+<option>Product Recall</option>
+
+</select>
+
+<label>Shipment ID</label>
+
+<input
+
+type="text"
+
+id="shipment_id"
+
+placeholder="SH001"
+
+required
+
+>
+
+<label>Severity</label>
+
+<select id="severity">
+
+<option>Low</option>
+
+<option>Medium</option>
+
+<option>High</option>
+
+<option>Critical</option>
+
+</select>
+
+<label>Description</label>
+
+<textarea
+
+id="description"
+
+rows="5"
+
+required
+
+></textarea>
+
+<button type="submit">
+
+Submit Incident
+
+</button>
+
+</form>
+
+<p id="message"></p>
+
+</div>
+
+<script>
+
+document
+
+.getElementById("incidentForm")
+
+.addEventListener(
+
+"submit",
+
+function(e){
+
+e.preventDefault()
+
+fetch(
+
+"http://global-pharma-supply-chain-alb-893661969.eu-west-2.elb.amazonaws.com/report_incident",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify(
+
+{
+
+incident_type:
+
+document
+
+.getElementById("incident_type")
+
+.value,
+
+shipment_id:
+
+document
+
+.getElementById("shipment_id")
+
+.value,
+
+severity:
+
+document
+
+.getElementById("severity")
+
+.value,
+
+description:
+
+document
+
+.getElementById("description")
+
+.value
+
+}
+
+)
+
+}
+
+)
+
+.then(
+
+response=>response.json()
+
+)
+
+.then(
+
+data=>{
+
+document
+
+.getElementById("message")
+
+.innerHTML=
+
+data.message
+
+}
+
+)
+
+.catch(
+
+error=>console.log(error)
+
+)
+
+}
+
+)
+
+</script>
+
+</body>
+
+</html>

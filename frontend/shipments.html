@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Shipments</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="shipments.html">Shipments</a>
+
+<a href="warehouses.html">Warehouses</a>
+
+<a href="incidents.html">Incidents</a>
+
+<a href="report_incident.html">Report Incident</a>
+
+</nav>
+
+<div class="container">
+
+<h1>Shipments</h1>
+
+<table>
+
+<tr>
+
+<th>ID</th>
+
+<th>Product</th>
+
+<th>Origin</th>
+
+<th>Destination</th>
+
+<th>Status</th>
+
+<th>Temperature</th>
+
+</tr>
+
+<tbody id="shipmentTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<script>
+
+fetch(
+"http://global-pharma-supply-chain-alb-893661969.eu-west-2.elb.amazonaws.com/shipments"
+)
+
+.then(response => response.json())
+
+.then(data => {
+
+let table=document.getElementById("shipmentTable")
+
+data.forEach(shipment=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${shipment.id}</td>
+
+<td>${shipment.product}</td>
+
+<td>${shipment.origin}</td>
+
+<td>${shipment.destination}</td>
+
+<td>
+
+<span class="status">
+
+${shipment.status}
+
+</span>
+
+</td>
+
+<td>${shipment.temperature}</td>
+
+</tr>
+
+`
+
+})
+
+})
+
+.catch(error=>console.log(error))
+
+</script>
+
+</body>
+
+</html>

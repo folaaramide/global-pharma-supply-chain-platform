@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Warehouses</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="shipments.html">Shipments</a>
+
+<a href="warehouses.html">Warehouses</a>
+
+<a href="incidents.html">Incidents</a>
+
+<a href="report_incident.html">Report Incident</a>
+
+</nav>
+
+<div class="container">
+
+<h1>Warehouses</h1>
+
+<table>
+
+<tr>
+
+<th>Warehouse</th>
+
+<th>Country</th>
+
+<th>Inventory</th>
+
+<th>Alerts</th>
+
+</tr>
+
+<tbody id="warehouseTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<script>
+
+fetch(
+"http://global-pharma-supply-chain-alb-893661969.eu-west-2.elb.amazonaws.com/warehouses"
+)
+
+.then(response => response.json())
+
+.then(data => {
+
+let table=document.getElementById("warehouseTable")
+
+data.forEach(warehouse=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${warehouse.warehouse}</td>
+
+<td>${warehouse.country}</td>
+
+<td>${warehouse.inventory}</td>
+
+<td>${warehouse.alerts}</td>
+
+</tr>
+
+`
+
+})
+
+})
+
+.catch(error=>console.log(error))
+
+</script>
+
+</body>
+
+</html>

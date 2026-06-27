@@ -24,7 +24,7 @@ The Global Pharma Supply Chain Platform addresses these challenges by providing:
 
 # Architecture
 
-![Architecture Diagram](screenshots/architecture-diagram.png)
+![Architecture Diagram](architecture-diagram.png)
 
 The solution is deployed within AWS using a multi-tier architecture consisting of:
 

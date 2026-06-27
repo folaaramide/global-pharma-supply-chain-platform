@@ -99,7 +99,7 @@ Examples include:
 
 ### Incident Management
 
-![Incident Dashboard](screenshots/incidents-dashboard.png)
+![Incident Dashboard](screenshots/reporting-incidents-dashboard.png)
 
 Frontend source:
 
